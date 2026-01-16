@@ -1,0 +1,63 @@
+
+<!-- DOM API -->
+<h2>DOM API: UI & Rendering</h2>
+<button id="btn">Change text</button>
+<p id="text">Original content</p>
+<hr>
+<script>
+  document.getElementById("btn").addEventListener("click", () => {
+    document.getElementById("text").textContent = "Updated by DOM API";
+  });
+</script>
+
+<!-- FETCH -->
+<h2>Networking API: Fetch</h2>
+<p id="user">Loading user...</p>
+<hr>
+<script>
+  fetch("https://api.github.com/users/tauber-s")
+    .then(response => response.json())
+    .then(data => {
+      document.getElementById("user").textContent = `Git user: ${data.login} | Git id: ${data.id}`;
+    })
+    .catch(error => {
+      document.getElementById("user").textContent = "Error loading user";
+    });
+</script>
+
+<!-- WEB STORAGE -->
+<h2>Storage API: Web Storage</h2>
+<p id="status">Loading theme...</p>
+<hr>
+<script>
+  localStorage.setItem("theme", "dark");
+  const theme = localStorage.getItem("theme");
+  document.getElementById("status").textContent = `Current theme: ${theme}`;
+</script>
+
+<!-- GEOLOCATION -->
+<h2>Hardware API: Geolocation</h2>
+<p id="location">Loading location...</p>
+<hr>
+<script>
+  navigator.geolocation.getCurrentPosition(
+    position => {
+      const latitude = position.coords.latitude;
+      const longitude = position.coords.longitude;
+
+      document.getElementById("location").textContent = `Latitude: ${latitude} | Longitude: ${longitude}`;
+    },
+    error => {
+      document.getElementById("location").textContent = "Permission denied or location unavailable.";
+    }
+  );
+</script>
+
+<!-- CANVAS -->
+<h2>Graphics API: Canvas</h2>
+<canvas id="canvas" width="150" height="100"></canvas>
+<script>
+  const ctx = document.getElementById("canvas").getContext("2d");
+  ctx.fillStyle = "purple";
+  ctx.fillRect(20, 20, 100, 50);
+</script>
